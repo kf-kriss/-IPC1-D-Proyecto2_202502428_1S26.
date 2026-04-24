@@ -31,6 +31,7 @@ public class Tienda extends javax.swing.JFrame {
         jTextHistorial.setEditable(false);
         
     }
+    
     private void actualizarAreas() {
         jTextCatalogo.setText(L.mostrarCatalogo());
         jTextCarrito.setText(L.mostrarCarrito() + "\n\nTOTAL: Q" + L.totalCarrito());
@@ -179,43 +180,43 @@ public class Tienda extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-    try {
-        String codigo = jTextCodigo.getText().trim();
-        int cantidad = Integer.parseInt(jTextCantidad.getText().trim());
+        try {
+            String codigo = jTextCodigo.getText().trim();
+            int cantidad = Integer.parseInt(jTextCantidad.getText().trim());
 
-        boolean agregado = L.agregarAlCarrito(codigo, cantidad);
+            boolean agregado = L.agregarAlCarrito(codigo, cantidad);
 
-        if (agregado) {
-            JOptionPane.showMessageDialog(this, "Agregado al carrito");
-            actualizarAreas();
-            jTextCodigo.setText("");
-            jTextCantidad.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "Código no encontrado o cantidad inválida");
+            if (agregado) {
+                JOptionPane.showMessageDialog(this, "Agregado al carrito");
+                actualizarAreas();
+                jTextCodigo.setText("");
+                jTextCantidad.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Código no encontrado o cantidad inválida");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese datos válidos");
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ingrese datos válidos");
-    }
     
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
     
-    boolean compra = L.confirmarCompra();
+        boolean compra = L.confirmarCompra();
 
-    if (compra) {
-        JOptionPane.showMessageDialog(this, "Compra realizada");
-        actualizarAreas();
-    } else {
-        JOptionPane.showMessageDialog(this, "No se pudo comprar. Verifique stock o carrito");
-    }
+        if (compra) {
+            JOptionPane.showMessageDialog(this, "Compra realizada");
+            actualizarAreas();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo comprar. Verifique stock o carrito");
+        }
     
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
     
-    F.setVisible(true);
-    this.dispose();
+        F.setVisible(true);
+        this.dispose();
     
     }//GEN-LAST:event_btnVolverActionPerformed
 

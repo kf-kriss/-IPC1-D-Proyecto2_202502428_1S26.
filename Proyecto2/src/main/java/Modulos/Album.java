@@ -28,44 +28,51 @@ public class Album extends javax.swing.JFrame {
     public Album(LogicaCompleta L, Funcionalidades F) {
         
         initComponents();
-    this.L = L;
-    this.F = F;
+        this.L = L;
+        this.F = F;
 
-    setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
 
-    if (this.L.inicio == null) {
-        this.L.crearMatriz(4, 6);
-    }
+        if (this.L.inicio == null) {
+            this.L.crearMatriz(4, 6);
+        }
 
-    this.L.cargarAlbum("album.txt"); // 🔥 ESTA LÍNEA FALTABA
-
-    mostrarAlbum();
+        this.L.cargarAlbum("album.txt");
+        mostrarAlbum();
     
     }
-    
-    
-
     
     public void mostrarAlbum() {
-    panelAlbum.removeAll();
-    panelAlbum.setLayout(new GridLayout(4, 6, 5, 5));
+        panelAlbum.removeAll();
+        panelAlbum.setLayout(new GridLayout(4, 6, 5, 5));
 
-    LogicaCompleta.NodoMatriz fila = L.inicio;
+        LogicaCompleta.NodoMatriz fila = L.inicio;
 
-    while (fila != null) {
-        LogicaCompleta.NodoMatriz col = fila;
+        while (fila != null) {
+            LogicaCompleta.NodoMatriz col = fila;
 
-        while (col != null) {
-            JPanel celda = new JPanel();
-            celda.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            while (col != null) {
+                JPanel celda = new JPanel();
+                celda.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-            LogicaCompleta.NodoMatriz nodoActual = col;
+                LogicaCompleta.NodoMatriz nodoActual = col;
 
-            if (col == seleccion1 || col == seleccion2) {
-                celda.setBackground(Color.YELLOW);
+                if (col == seleccion1 || col == seleccion2) {
+                    celda.setBackground(Color.YELLOW);
 
-                if (col.dato == null) {
+                    if (col.dato == null) {
+                        celda.add(new JLabel("Vacía"));
+                    } else {
+                        celda.setLayout(new GridLayout(3, 1));
+                        celda.add(new JLabel(col.dato.nombre));
+                        celda.add(new JLabel(col.dato.tipo));
+                        celda.add(new JLabel(col.dato.rareza));
+                    }
+
+                } else if (col.dato == null) {
+                    celda.setBackground(Color.LIGHT_GRAY);
                     celda.add(new JLabel("Vacía"));
+
                 } else {
                     celda.setLayout(new GridLayout(3, 1));
                     celda.add(new JLabel(col.dato.nombre));
@@ -73,48 +80,37 @@ public class Album extends javax.swing.JFrame {
                     celda.add(new JLabel(col.dato.rareza));
                 }
 
-            } else if (col.dato == null) {
-                celda.setBackground(Color.LIGHT_GRAY);
-                celda.add(new JLabel("Vacía"));
+                celda.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
 
-            } else {
-                celda.setLayout(new GridLayout(3, 1));
-                celda.add(new JLabel(col.dato.nombre));
-                celda.add(new JLabel(col.dato.tipo));
-                celda.add(new JLabel(col.dato.rareza));
+                        if (seleccion1 == null) {
+                            seleccion1 = nodoActual;
+                        } else if (seleccion2 == null) {
+                            seleccion2 = nodoActual;
+                        }
+
+                        String s1 = (seleccion1 != null && seleccion1.dato != null)
+                                ? seleccion1.dato.nombre : "Vacía";
+                        String s2 = (seleccion2 != null && seleccion2.dato != null)
+                                ? seleccion2.dato.nombre : "Vacía";
+
+                        lblSeleccion.setText("1: " + s1 + " | 2: " + s2);
+
+                        mostrarAlbum();
+                    }
+                });
+
+                panelAlbum.add(celda);
+                col = col.derecha;
             }
 
-            celda.addMouseListener(new java.awt.event.MouseAdapter() {
-                @Override
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-                    if (seleccion1 == null) {
-                        seleccion1 = nodoActual;
-                    } else if (seleccion2 == null) {
-                        seleccion2 = nodoActual;
-                    }
-
-                    String s1 = (seleccion1 != null && seleccion1.dato != null)
-                            ? seleccion1.dato.nombre : "Vacía";
-                    String s2 = (seleccion2 != null && seleccion2.dato != null)
-                            ? seleccion2.dato.nombre : "Vacía";
-
-                    lblSeleccion.setText("1: " + s1 + " | 2: " + s2);
-
-                    mostrarAlbum();
-                }
-            });
-
-            panelAlbum.add(celda);
-            col = col.derecha;
+            fila = fila.abajo;
         }
 
-        fila = fila.abajo;
+        panelAlbum.revalidate();
+        panelAlbum.repaint();
     }
-
-    panelAlbum.revalidate();
-    panelAlbum.repaint();
-}
     
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -283,8 +279,8 @@ public class Album extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
         L.guardarAlbum("album.txt");
-    F.setVisible(true);
-    this.dispose();
+        F.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -300,39 +296,41 @@ public class Album extends javax.swing.JFrame {
         lblSeleccion.setText("Selección: ninguna");
 
         mostrarAlbum();
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecciona 2 celdas");
-    }
+        
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona 2 celdas");
+        }
         
     }//GEN-LAST:event_btnIntercambiarActionPerformed
 
     private void btnAgregarCartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCartaActionPerformed
         
         try {
-        LogicaCompleta.Carta nueva = L.new Carta(
-            txtCodigo.getText(),
-            txtNombre.getText(),
-            txtTipo.getText(),
+            LogicaCompleta.Carta nueva = L.new Carta(
+                txtCodigo.getText(),
+                txtNombre.getText(),
+                txtTipo.getText(),
             txtRareza.getText(),
             Integer.parseInt(txtAtaque.getText()),
             Integer.parseInt(txtDefensa.getText()),
             Integer.parseInt(txtVida.getText())
         );
 
-        L.agregarCarta(nueva);
-        mostrarAlbum();
+            L.agregarCarta(nueva);
+            mostrarAlbum();
 
-        txtCodigo.setText("");
-        txtNombre.setText("");
-        txtTipo.setText("");
-        txtRareza.setText("");
-        txtAtaque.setText("");
-        txtDefensa.setText("");
-        txtVida.setText("");
+            txtCodigo.setText("");
+            txtNombre.setText("");
+            txtTipo.setText("");
+            txtRareza.setText("");
+            txtAtaque.setText("");
+            txtDefensa.setText("");
+            txtVida.setText("");
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Datos inválidos");
-    }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Datos inválidos");
+        }
+        
     }//GEN-LAST:event_btnAgregarCartaActionPerformed
 
 

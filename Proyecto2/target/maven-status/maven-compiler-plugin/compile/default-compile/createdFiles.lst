@@ -9,7 +9,11 @@ Logica\LogicaCompleta$ItemCarrito.class
 Logica\LogicaCompleta$Juego.class
 Modulos\Album.class
 Logica\LogicaCompleta$Compra.class
+Logica\LogicaCompleta$Torneo.class
 main\ad\proyecto2\ADProyecto2.class
 Modulos\Reportes.class
+Logica\LogicaCompleta$NodoCola.class
 Modulos\Datos.class
+Logica\LogicaCompleta$ClienteTicket.class
+Logica\LogicaCompleta$ColaTickets.class
 Logica\LogicaCompleta$NodoMatriz.class

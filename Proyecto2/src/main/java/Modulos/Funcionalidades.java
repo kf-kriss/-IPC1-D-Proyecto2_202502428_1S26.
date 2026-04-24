@@ -141,7 +141,7 @@ public class Funcionalidades extends javax.swing.JFrame {
     }//GEN-LAST:event_jAlbumDescripcionActionPerformed
 
     private void jEventosDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEventosDescripcionActionPerformed
-        Eventos E = new Eventos(L);
+        Eventos E = new Eventos(L, this);
         E.setVisible(true);
         
         this.setVisible(false);
