@@ -1,0 +1,6 @@
+Kristhoper Franklin Ucelo Pirir
+202502428
+3536412430101@ingenieria.usac.edu.gt
+Sección D
+Primer semestre 2026
+GameZone Pro es una aplicación de escritorio en Java que integra tienda, álbum, eventos, recompensas y reportes.

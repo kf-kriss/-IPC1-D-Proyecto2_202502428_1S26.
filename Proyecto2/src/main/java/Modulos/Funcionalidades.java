@@ -155,14 +155,14 @@ public class Funcionalidades extends javax.swing.JFrame {
     }//GEN-LAST:event_jRecompensasDescripcionActionPerformed
 
     private void jReportesDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportesDescripcionActionPerformed
-        Reportes R = new Reportes(L);
+        Reportes R = new Reportes(L, this);
         R.setVisible(true);
         
         this.setVisible(false);
     }//GEN-LAST:event_jReportesDescripcionActionPerformed
 
     private void jDatosDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosDescripcionActionPerformed
-        Datos D = new Datos(L);
+        Datos D = new Datos(L, this);
         D.setVisible(true);
         
         this.setVisible(false);

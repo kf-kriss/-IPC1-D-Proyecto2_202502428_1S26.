@@ -4,6 +4,7 @@
  */
 package Logica;
 
+import Modulos.Album;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -910,6 +911,242 @@ public String mostrarLeaderboard() {
 
 
 
+    //-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
 
+
+
+    public String fechaReporte() {
+        java.time.LocalDateTime ahora = java.time.LocalDateTime.now();
+
+        return ahora.getDayOfMonth() + "_" +
+               ahora.getMonthValue() + "_" +
+               ahora.getYear() + "_" +
+               ahora.getHour() + "_" +
+               ahora.getMinute() + "_" +
+               ahora.getSecond();
+    }
+
+    public void reporteInventario() {
+        try {
+            String nombre = fechaReporte() + "_Inventario.html";
+            BufferedWriter bw = new BufferedWriter(new FileWriter(nombre));
+
+            bw.write("<html>");
+            bw.write("<head><title>Reporte Inventario</title></head>");
+            bw.write("<body>");
+
+            bw.write("<h1>Reporte de Inventario</h1>");
+
+            bw.write("<table border='1'>");
+            bw.write("<tr>");
+            bw.write("<th>Código</th>");
+            bw.write("<th>Nombre</th>");
+            bw.write("<th>Género</th>");
+            bw.write("<th>Precio</th>");
+            bw.write("<th>Plataforma</th>");
+            bw.write("<th>Stock</th>");
+            bw.write("</tr>");
+
+            Juego aux = inicioCatalogo;
+
+            while (aux != null) {
+                bw.write("<tr>");
+                bw.write("<td>" + aux.codigo + "</td>");
+                bw.write("<td>" + aux.nombre + "</td>");
+                bw.write("<td>" + aux.genero + "</td>");
+                bw.write("<td>" + aux.precio + "</td>");
+                bw.write("<td>" + aux.plataforma + "</td>");
+                bw.write("<td>" + aux.stock + "</td>");
+                bw.write("</tr>");
+
+                aux = aux.siguiente;
+            }
+
+            bw.write("</table>");
+            bw.write("</body>");
+            bw.write("</html>");
+    
+            bw.close();
+
+            abrirHTML(nombre);
+
+        } catch (Exception e) {
+            System.out.println("Error reporte inventario: " + e.getMessage());
+        }
+    }
+
+    public void reporteAlbum() {
+        try {
+
+            crearMatriz(4, 6);
+
+            cargarAlbum("album.txt");
+
+            String nombre = fechaReporte() + "_Album.html";
+            BufferedWriter bw = new BufferedWriter(new FileWriter(nombre));
+
+            bw.write("<html>");
+            bw.write("<head><title>Reporte Album</title></head>");
+            bw.write("<body>");
+
+            bw.write("<h1>Reporte del Álbum</h1>");
+
+            bw.write("<table border='1'>");
+
+            NodoMatriz fila = inicio;
+
+            while (fila != null) {
+                bw.write("<tr>");
+                NodoMatriz col = fila;
+
+                while (col != null) {
+
+                    if (col.dato == null) {
+                        bw.write("<td>Vacía</td>");
+                    } else {
+                        bw.write("<td>");
+                        bw.write(col.dato.nombre + "<br>");
+                        bw.write(col.dato.tipo + "<br>");
+                        bw.write(col.dato.rareza);
+                        bw.write("</td>");
+                    }
+
+                    col = col.derecha;
+                }
+
+                bw.write("</tr>");
+                fila = fila.abajo;
+            }
+
+            bw.write("</table>");
+            bw.write("</body>");
+            bw.write("</html>");
+
+            bw.close();
+
+            abrirHTML(nombre);
+
+        } catch (Exception e) {
+            System.out.println("Error reporte album: " + e.getMessage());
+        }
+    }
+
+    public void reporteTorneos() {
+        try {
+        
+            cargarTorneos("torneos.txt");
+
+            String nombre = fechaReporte() + "_Torneos.html";
+            BufferedWriter bw = new BufferedWriter(new FileWriter(nombre));
+
+            bw.write("<html>");
+            bw.write("<head><title>Reporte Torneos</title></head>");
+            bw.write("<body>");
+
+            bw.write("<h1>Reporte de Torneos</h1>");
+
+            bw.write("<table border='1'>");
+            bw.write("<tr>");
+            bw.write("<th>ID</th>");
+            bw.write("<th>Nombre</th>");
+            bw.write("<th>Juego</th>");
+            bw.write("<th>Fecha</th>");
+            bw.write("<th>Hora</th>");
+            bw.write("<th>Precio</th>");
+            bw.write("<th>Tickets</th>");
+            bw.write("</tr>");
+
+            Torneo aux = inicioTorneos;
+
+            while (aux != null) {
+                bw.write("<tr>");
+                bw.write("<td>" + aux.id + "</td>");
+                bw.write("<td>" + aux.nombre + "</td>");
+                bw.write("<td>" + aux.juego + "</td>");
+                bw.write("<td>" + aux.fecha + "</td>");
+                bw.write("<td>" + aux.hora + "</td>");
+                bw.write("<td>" + aux.precio + "</td>");
+                bw.write("<td>" + aux.tickets + "</td>");
+                bw.write("</tr>");
+
+                aux = aux.siguiente;
+            }
+
+            bw.write("</table>");
+            bw.write("</body>");
+            bw.write("</html>");
+
+            bw.close();
+
+            abrirHTML(nombre);
+
+        } catch (Exception e) {
+            System.out.println("Error reporte torneos: " + e.getMessage());
+        }
+    }
+
+    public void reporteVentas() {
+        try {
+            String nombre = fechaReporte() + "_Ventas.html";
+            BufferedWriter bw = new BufferedWriter(new FileWriter(nombre));
+
+            bw.write("<html>");
+            bw.write("<head><title>Reporte Ventas</title></head>");
+            bw.write("<body>");
+
+            bw.write("<h1>Reporte de Ventas</h1>");
+
+            bw.write("<table border='1'>");
+            bw.write("<tr>");
+            bw.write("<th>Fecha</th>");
+            bw.write("<th>Detalle</th>");
+            bw.write("<th>Total</th>");
+            bw.write("</tr>");
+
+            Compra aux = inicioHistorial;
+
+            while (aux != null) {
+                bw.write("<tr>");
+                bw.write("<td>" + aux.fecha + "</td>");
+                bw.write("<td>" + aux.detalle + "</td>");
+                bw.write("<td>" + aux.total + "</td>");
+                bw.write("</tr>");
+
+                aux = aux.siguiente;
+            }
+
+            bw.write("</table>");
+            bw.write("</body>");
+            bw.write("</html>");
+
+            bw.close();
+
+            abrirHTML(nombre);
+
+        } catch (Exception e) {
+            System.out.println("Error reporte ventas: " + e.getMessage());
+        }
+    }
+    
+
+    public void abrirHTML(String archivo) {
+        try {
+            java.io.File f = new java.io.File(archivo);
+            java.awt.Desktop.getDesktop().browse(f.toURI());
+        } catch (Exception e) {
+            System.out.println("No se pudo abrir reporte: " + e.getMessage());
+        }
+    }
+
+    
+    
+    
+    
+    //-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
+    
+    
+    
     
 }
