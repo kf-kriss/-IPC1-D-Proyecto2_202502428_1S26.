@@ -1,3 +1,5 @@
 T1|Torneo FIFA|FIFA|25/04/2026|14:00|50|5
 T2|Torneo Smash|Smash|26/04/2026|16:00|40|4
 T3|Torneo Mario Kart|Mario Kart|27/04/2026|18:00|35|6
+T4|Torneo LOL|LoL|28/04/2026|19:00|20|10
+T5|Torneo CSGO|CSGO|29/04/2026|20:00|45|8
