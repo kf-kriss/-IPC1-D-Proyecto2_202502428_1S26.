@@ -1,4 +1,4 @@
-J001|FIFA 24|Deportes|450|PlayStation|10|Juego de futbol
-J002|Minecraft|Aventura|200|PC|15|Juego de construccion
-J003|Resident Evil 4|Terror|350|Xbox|5|Juego de terror
-J004|Zelda TOTK|Aventura|500|Nintendo Switch|8|Juego de aventura
+J001|FIFA 24|Deportes|750|PlayStation|10|Juego de futbol
+J002|Minecraft|Aventura|300|PC|15|Juego de construccion
+J003|Resident Evil 4|Terror|550|Xbox|5|Juego de terror
+J004|Zelda TOTK|Aventura|400|Nintendo Switch|8|Juego de aventura
